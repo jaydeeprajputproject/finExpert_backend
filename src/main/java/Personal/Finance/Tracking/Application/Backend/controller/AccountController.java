@@ -32,4 +32,9 @@ public class AccountController {
         // Find all accounts using the JpaRepository
         return accountRepository.findAll();
     }
+
+    @GetMapping("/account-types")
+    public  List<String> getDistinctAccountTypes() {
+        return accountRepository.findDistinctByAccountType();
+    }
 }

@@ -1,7 +1,7 @@
 package Personal.Finance.Tracking.Application.Backend.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+        import java.math.BigDecimal;
 
 /**
  * JPA Entity mapping to the 'accounts' PostgreSQL table.
@@ -23,8 +23,8 @@ public class Account {
     @Column(name = "account_type", nullable = false)
     private String accountType; // BANK, CREDIT_CARD, UPI_APP
 
-    @Column(name = "current_balance")
-    private BigDecimal currentBalance; // Use BigDecimal for NUMERIC type
+    @Column(name = "bank_name")
+    private String bankName;
 
     // --- Getters and Setters (REQUIRED by JPA/Spring) ---
 
@@ -52,11 +52,11 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public BigDecimal getCurrentBalance() {
-        return currentBalance;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setCurrentBalance(BigDecimal currentBalance) {
-        this.currentBalance = currentBalance;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 }

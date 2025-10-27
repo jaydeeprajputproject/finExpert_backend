@@ -4,6 +4,7 @@ package Personal.Finance.Tracking.Application.Backend.controller;
 import Personal.Finance.Tracking.Application.Backend.model.ConsumerType;
 import Personal.Finance.Tracking.Application.Backend.repository.ConsumerTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/consumer-types")
+@CrossOrigin(origins = "*") // Allows requests from any origin
 public class ConsumerTypeController {
 
     private final ConsumerTypeRepository consumerTypeRepository;
