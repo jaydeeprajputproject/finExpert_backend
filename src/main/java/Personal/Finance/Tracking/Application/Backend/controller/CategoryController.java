@@ -2,7 +2,9 @@ package Personal.Finance.Tracking.Application.Backend.controller;
 
 import Personal.Finance.Tracking.Application.Backend.model.Category;
 import Personal.Finance.Tracking.Application.Backend.repository.CategoryRepository;
+import Personal.Finance.Tracking.Application.Backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,12 @@ public class CategoryController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     /**
      * Retrieves all categories from the database.
@@ -44,5 +52,11 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<Category>> getCategories(@RequestParam String transactionType) {
+        List<Category> categories = categoryService.getCategoriesByTransactionType(transactionType);
+        return ResponseEntity.ok(categories);
     }
 }
