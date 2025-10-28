@@ -19,4 +19,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     @Query("SELECT DISTINCT a.accountType FROM Account a")
     List<String> findDistinctByAccountType();
+
+    List<Account> findByAccountType(String accountType);
 }

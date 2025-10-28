@@ -18,4 +18,9 @@ public class AccountService {
         // Implementation will go here
         return accountRepository.findDistinctByAccountType();
     }
+
+    List<Account> findByAccountType(String accountType) {
+        // Implementation will go here
+        return accountRepository.findByAccountType(accountType);
+    }
 }

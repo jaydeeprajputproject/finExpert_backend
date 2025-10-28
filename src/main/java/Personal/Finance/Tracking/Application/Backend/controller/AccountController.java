@@ -5,10 +5,8 @@ package Personal.Finance.Tracking.Application.Backend.controller;
 import Personal.Finance.Tracking.Application.Backend.model.Account;
 import Personal.Finance.Tracking.Application.Backend.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +34,10 @@ public class AccountController {
     @GetMapping("/account-types")
     public  List<String> getDistinctAccountTypes() {
         return accountRepository.findDistinctByAccountType();
+    }
+
+    @GetMapping("/by-type")
+    public ResponseEntity<List<Account>> getAccountsByType(@RequestParam String accountType) {
+        return ResponseEntity.ok(accountRepository.findByAccountType(accountType));
     }
 }

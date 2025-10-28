@@ -1,12 +1,10 @@
 package Personal.Finance.Tracking.Application.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Entity class representing a financial transaction.
- */
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -14,135 +12,85 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
-    private Long id;
+    private Long transactionId;
 
     @Column(name = "transaction_type", nullable = false)
     private String transactionType;
 
-
-    @Column(name = "transaction_date", nullable = false)
-    private LocalDateTime date;
-
+    @JsonProperty("amount")
     @Column(name = "transaction_amount", nullable = false)
-    private BigDecimal amount;
+    private Double transactionAmount;
 
-    @Column(name = "source_account_id")
-    private Long sourceAccountId;
+    @JsonProperty("date")
+    @Column(name = "transaction_date", nullable = false)
+    private LocalDate transactionDate;
 
-    @Column(name = "target_account_id")
-    private Long targetAccountId;
+    @Column(name = "account_name", nullable = false)
+    private String accountName;
 
-    @Column(name = "upi_app_id")
-    private Long upiAppId;
+    @Column(name = "category")
+    private String category;
 
-    @Column(name = "category_id")
-    private Long categoryId;
+    @JsonProperty("consumerType")
+    @Column(name = "consumer_type")
+    private String consumer;
 
-    @Column(name = "consumer_id")
-    private Long consumerId;
-
-    @Column(name = "payment_mode")
+    @JsonProperty("accountType")
+    @Column(name = "account_type")
     private String paymentMode;
 
     @Column(name = "remarks")
     private String remarks;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    // 🔹 Constructors
+    public Transaction() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(String transactionType) {
+    public Transaction(Long transactionId, String transactionType, Double transactionAmount,
+                       LocalDate transactionDate, String accountName, String category,
+                       String consumer, String paymentMode, String remarks, LocalDateTime createdAt) {
+        this.transactionId = transactionId;
         this.transactionType = transactionType;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public Long getSourceAccountId() {
-        return sourceAccountId;
-    }
-
-    public void setSourceAccountId(Long sourceAccountId) {
-    }
-
-    public Long getTargetAccountId() {
-        return targetAccountId;
-    }
-
-    public void setTargetAccountId(Long targetAccountId) {
-        this.targetAccountId = targetAccountId;
-    }
-
-    public Long getUpiAppId() {
-        return upiAppId;
-    }
-
-    public void setUpiAppId(Long upiAppId) {
-        this.upiAppId = upiAppId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Long getConsumerId() {
-        return consumerId;
-    }
-
-    public void setConsumerId(Long consumerId) {
-        this.consumerId = consumerId;
-    }
-
-    public String getPaymentMode() {
-        return paymentMode;
-    }
-
-    public void setPaymentMode(String paymentMode) {
+        this.transactionAmount = transactionAmount;
+        this.transactionDate = transactionDate;
+        this.accountName = accountName;
+        this.category = category;
+        this.consumer = consumer;
         this.paymentMode = paymentMode;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    // 🔹 Getters and Setters
+    public Long getTransactionId() { return transactionId; }
+    public void setTransactionId(Long transactionId) { this.transactionId = transactionId; }
+
+    public String getTransactionType() { return transactionType; }
+    public void setTransactionType(String transactionType) { this.transactionType = transactionType; }
+
+    public Double getTransactionAmount() { return transactionAmount; }
+    public void setTransactionAmount(Double transactionAmount) { this.transactionAmount = transactionAmount; }
+
+    public LocalDate getTransactionDate() { return transactionDate; }
+    public void setTransactionDate(LocalDate transactionDate) { this.transactionDate = transactionDate; }
+
+    public String getAccountName() { return accountName; }
+    public void setAccountName(String accountName) { this.accountName = accountName; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public String getConsumer() { return consumer; }
+    public void setConsumer(String consumer) { this.consumer = consumer; }
+
+    public String getPaymentMode() { return paymentMode; }
+    public void setPaymentMode(String paymentMode) { this.paymentMode = paymentMode; }
+
+    public String getRemarks() { return remarks; }
+    public void setRemarks(String remarks) { this.remarks = remarks; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
